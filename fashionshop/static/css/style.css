@@ -1,0 +1,102 @@
+:root {
+    --font-logo: font-family: "Roboto", sans-serif;;
+}
+
+p {
+    margin: 0;
+}
+
+rect {
+    height: 100%;
+}
+
+
+/* cabeçalho */
+.header p{
+    font-family: var(--font-logo);
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+    box-sizing: border-box;
+}
+
+
+/* busca por modelos */
+input {
+    border: none;
+    border: none;
+    outline: none;
+}
+
+label {
+    width: fit-content;
+}
+
+.image-container-search {
+    width: 95%;
+    overflow: hidden;
+}
+
+.image-container-search img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-slogan {
+    color: white;
+    top: 20px;
+    left: 20px;
+}
+
+.search-input {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    bottom: 20px;
+}
+
+.search-input:focus-within {
+    border: 2px solid #6F8EFB;
+    box-sizing: border-box;
+}
+
+.search-input:focus-within .i-search {
+    color: #6F8EFB;
+}
+
+/* FIM busca por modelos */
+
+/* Categorias */
+
+.container-buttons, .categories-container  {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.icons {
+    min-width: fit-content;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 3px 10px 3px 10px;
+    cursor: pointer;
+}
+
+.icons:hover {
+    background-color: #6e6f7071;
+}
+/* FIM Categorias */
+
+
+/* Products */
+
+.infos:hover {
+    cursor: pointer;
+}
+
+/* FIM Products */
+
+

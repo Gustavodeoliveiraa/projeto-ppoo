@@ -1,0 +1,44 @@
+{% load static %}
+
+
+<div class="categories-container mt-5 w-100">
+    <p class="fw-bolder ms-3">Categorias</p>
+    <div class="container-buttons d-flex w-100 mt-3">
+        <div class="icons d-flex justify-content-center ms-3">
+            <a href=" {% url "home" %} ">
+                <p class="m-0">all</p>
+            </a>
+        </div>
+    
+        <div class="icons d-flex justify-content-center ms-3 ">
+            <form action="{% url "categorie" %}" method="post" class="d-flex cate">
+                {% csrf_token %}
+                <p>{% include "../svg/shirt.html" %}</p>
+                <p>Camisetas</p>
+                <input type="text" name="categories" value="camisetas" class="visually-hidden">
+            </form>
+
+        </div>
+
+        <div class="icons d-flex justify-content-center ms-3 ">
+            <form action="{% url "categorie" %}" method="post" class="d-flex cate">
+                {% csrf_token %}
+                <p>{% include "../svg/pants.html" %}</p>
+                <p>Calças</p>
+                <input type="text" name="categories" value="calças" class="visually-hidden">
+            </form>
+
+        </div>
+
+        <div class="icons d-flex justify-content-center ms-3 ">
+            <form action="{% url "categorie" %}" method="post" class="d-flex cate" >
+                {% csrf_token %}
+                {% include "../svg/sweatshirt.html" %}
+                <p>Moletom</p>
+                <input type="text" name="categories" value="moletom" class="visually-hidden">
+            </form>
+            
+        </div>
+
+    </div>
+</div>

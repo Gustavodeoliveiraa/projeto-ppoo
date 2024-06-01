@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="search-container b-2 mt-5 w-100 d-flex justify-content-center position-relative ">
+    <div class="image-container-search d-flex position-relative d-flex justify-content-center">
+        <img class="" src="{% static "imagens/container-search.png" %}" alt="">
+        <div class="text-slogan position-absolute fs-4 w-100">
+            <p>Enconte as melhores <br/>  roupas para você</p>
+        </div>
+        <div class="search-input position-absolute w-75 d-flex justify-center-center p-1">
+
+            <form action="{% url "search" %}" method="post" class="d-flex" id='search_input'>
+                {% csrf_token %}
+                <label class="i-search ps-1 pe-2" for="search"><i class="fa-solid fa-magnifying-glass"></i></label>
+                <input class="w-100" type="text" name="name" id="search" placeholder="Buscar por Modelos">
+            </form>
+
+        </div>
+
+    </div>
+</div>
+
+
+

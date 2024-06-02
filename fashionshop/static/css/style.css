@@ -32,6 +32,9 @@ input {
 }
 
 label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: fit-content;
 }
 
@@ -41,8 +44,6 @@ label {
 }
 
 .image-container-search img{
-    width: 100%;
-    height: 100%;
     object-fit: cover;
 }
 
@@ -72,6 +73,15 @@ label {
 
 /* Categorias */
 
+.container-buttons  {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.212);
+    border-radius: 20px;
+}
+
+.container-buttons::-webkit-scrollbar, .categories-container::-webkit-scrollbar {
+    display: none;
+}
+
 .container-buttons, .categories-container  {
     overflow-x: auto;
     white-space: nowrap;
@@ -90,13 +100,44 @@ label {
 }
 /* FIM Categorias */
 
+.cursor,
+.row-custom,
+.container{
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+    overflow: hidden;
+}
 
-/* Products */
-
-.infos:hover {
+.cursor:hover {
     cursor: pointer;
+    transform: scale(1.1);
 }
 
 /* FIM Products */
 
 
+@media (max-width:992px ) {
+    .container{
+        max-width: 900px;
+    } 
+}
+
+@media (min-width: 620px) {
+    .image-container-search {
+        width: 80% !important;
+    }
+    
+    .text-slogan {
+        top: 60px;
+    }
+    
+    .search-input {
+        height: 40px;
+        bottom: 40px;
+    }
+
+}
+
+@media (min-width: 100px) {
+    
+}

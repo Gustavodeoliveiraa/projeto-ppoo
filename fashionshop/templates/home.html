@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="w-100 h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@
 
     <script defer src="{% static "javascript/index.js" %}"></script>
 </head>
-    <body class="w-100 p-0 b-0 m-0">
+    <body class="w-100 h-100 p-0 b-0 m-0">
         {% block home %}
             {% include "partials/header.html" %}
             {% include "partials/search.html" %}

@@ -1,0 +1,76 @@
+label {
+    color: white;
+}
+
+.container-register {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-image-register {
+    width: 70%;
+    height: 60%;
+    background-image: url('../imagens/register-form.png');
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-secondary {
+    background-color: #6c757da1;
+}
+
+button.btn  {
+    color: black !important;
+}
+
+@media (min-width: 900px) {
+    .container-image-register {
+        width: 55%;
+    }
+
+    .buttons {
+        width: 45% !important;
+    }
+}
+
+@media (min-width: 1000px) {
+    .container-image-register {
+        width: 60%;
+    }
+}
+
+@media (min-width: 1150px) {
+    .container-image-register {
+        width: 50%;
+    }
+
+    .buttons {
+        width: 40% !important;
+    }
+}
+
+@media (min-width: 1450px) {
+    .container-image-register {
+        width: 40%;
+    }
+
+    .buttons {
+        width: 25% !important;
+    }
+}
+
+
+@media (min-width: 1600px) {
+    .container-image-register {
+        width: 35%;
+    }
+
+    .buttons {
+        width: 20% !important;
+    }
+}

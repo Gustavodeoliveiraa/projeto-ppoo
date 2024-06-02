@@ -9,6 +9,34 @@
 
 
 {% block home %}
+    <div class="container-register d-flex flex-column">
+        <div class="container-image-register">
+            <form class="row g-3 d-flex w-75" >
+                <div class="col-md-12">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input placeholder="Seu nome" type="nome" class="form-control" id="nome">
+                </div>
 
-    <p>salve</p>
+                <div class="col-md-12">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input placeholder="exemplo@gmail.com" type="email" class="form-control" id="inputEmail4">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="password" class="form-label">Senha</label>
+                    <input placeholder="********" type="password" class="form-control" id="password">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="passwordConfirm" class="form-label">Confirmar Senha</label>
+                    <input placeholder="********" type="password" class="form-control" id="passwordConfirm">
+                </div>
+            </form>
+        </div>
+        
+        <div class="d-grid gap-1 w-50 mt-5 buttons">
+            <button class="btn btn-secondary mb-3 p-2" type="button">Registrar-se</button>
+            <button class="btn btn-secondary p-2 ms-5 me-5" type="button">Entrar</button>
+        </div>
+    </div>
 {% endblock home %}

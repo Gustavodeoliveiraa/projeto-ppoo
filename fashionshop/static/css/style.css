@@ -1,5 +1,9 @@
 :root {
-    --font-logo: font-family: "Roboto", sans-serif;;
+    --font-logo: font-family: "Roboto", sans-serif;
+    --color-success-dark: #4a9c5d;
+    --color-success-light: #d4edda;
+    --color-error-dark: #da525d;
+    --color-error-light: #f8d7da;
 }
 
 p {
@@ -140,4 +144,31 @@ label {
 
 @media (min-width: 100px) {
     
+}
+
+
+/* mensagens */
+
+.message {
+    height: 8%;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    border-radius: 20px;
+}
+
+.message-success{
+    border: 1px solid var(--color-success-dark);
+    background: var(--color-success-light);
+    color: var(--color-success-dark);
+}
+
+.message-error {
+    border: 1px solid var(--color-error-dark);
+    background: var(--color-error-light);
+    color: var(--color-error-dark);
 }

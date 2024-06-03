@@ -1,5 +1,13 @@
 {% load static %}
 
+ {% if messages %}
+    {% for message in messages %}
+        <div class="message message.success {{message.tags}}">
+            <p>{{message}}</p>
+        </div>
+    {% endfor %}
+ {% endif %}
+
 <div class="header d-flex b-0 p-0 p-2 fs-4 w-100 justify-content-between" >
     <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
 

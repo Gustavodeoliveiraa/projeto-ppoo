@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.forms import ModelForm
+from django import forms
 
 class Categories(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
@@ -32,3 +33,58 @@ class ShoppingCarts(models.Model):
 
     def __str__(self) -> str:
         return f'{self.owner.username}'
+
+
+class FormRegister(forms.ModelForm):
+    username = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Seu nome'}
+        )
+    )
+
+    email = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder': 'exemplo@gmail.com'}
+        )
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Senha'}
+        )
+    )
+
+    confirm_password = forms.CharField(
+        label='Confirmar senha',
+        max_length=255,
+        widget=forms.PasswordInput(
+            attrs={'placeholder': 'Confirmar senha'}
+        )
+    )
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
+    def clean(self):
+
+        password1 = self.cleaned_data.get('password')
+        password2 = self.cleaned_data.get('confirm_password')
+
+        if password1 != password2:
+            self.add_error('confirm_password', 'As senhas são diferentes.')
+
+            return self.cleaned_data
+        return super().clean()
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            self.add_error('email', 'Este email já está em uso.')
+        return email
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if User.objects.filter(username=username).exists():
+            self.add_error('username', 'Este nome já está em uso.')
+        return username

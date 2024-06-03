@@ -1,6 +1,8 @@
-from django.shortcuts import render
-from .models import Product
+from django.shortcuts import render, redirect
+from .models import Product, FormRegister
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 
 
 @csrf_exempt
@@ -41,5 +43,27 @@ def get_by_categories(request):
     )
 
 
+@csrf_exempt
 def cadastra(request):
-    return render(request, template_name="partials/register.html")
+    if request.method == 'GET':
+        form = FormRegister()
+
+    if request.method == 'POST':
+        form = FormRegister(request.POST)
+
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if not User.objects.filter(email=email).exists():
+            User.objects.create(
+                username=username, email=email, password=password
+            )
+
+            messages.success(request, 'Cadastrado com sucesso')
+
+            return redirect('home')
+
+    return render(
+        request, template_name="partials/register.html", context={'form': form}
+    )

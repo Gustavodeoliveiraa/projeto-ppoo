@@ -133,3 +133,5 @@ MESSAGE_TAGS = {
     constants.INFO: 'message-info',
     constants.SUCCESS: 'message-success',
 }
+
+LOGIN_URL = '/login/'

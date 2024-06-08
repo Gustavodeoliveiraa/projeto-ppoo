@@ -1,19 +1,49 @@
-from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Product, FormRegister, ShoppingCart, CartItem
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth import logout, login
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
+from django.contrib.auth import authenticate
+from .models import LoginForm
 
 
 @csrf_exempt
 def Home(request):
+    login = True if request.user.is_authenticated else False
     products = Product.objects.all().order_by('-id')
 
     return render(
-        request, template_name="home.html", context={'products': products}
+        request, template_name="home.html", context={
+            'products': products,
+            'login': login
+        }
     )
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'logado com sucesso')
+                return redirect('home')
+            else:
+                form.add_error(None, 'Nome de usuário ou senha incorretos.')
+    else:
+        form = LoginForm()
+    return render(request, 'partials/login.html', {'form': form})
+
+
+@login_required(redirect_field_name='next')
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 
 def get_by_name(request):
@@ -58,7 +88,7 @@ def cadastra(request):
         password = request.POST.get('password')
 
         if not User.objects.filter(email=email).exists():
-            User.objects.create(
+            User.objects.create_user(
                 username=username, email=email, password=password
             )
 
@@ -71,6 +101,7 @@ def cadastra(request):
     )
 
 
+@login_required(redirect_field_name='next')
 def shoppingcart(request):
     cart, created = ShoppingCart.objects.get_or_create(owner=request.user)
 
@@ -80,7 +111,7 @@ def shoppingcart(request):
     )
 
 
-@login_required
+@login_required(redirect_field_name='next')
 def add_to_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart, created = ShoppingCart.objects.get_or_create(owner=request.user)
@@ -96,9 +127,11 @@ def add_to_cart(request, product_id):
     return redirect('home')
 
 
-@login_required
+@login_required(redirect_field_name='next')
 def remove_from_cart(request, item_id):
-    cart_item = get_object_or_404(CartItem, id=item_id, cart__owner=request.user)
+    cart_item = get_object_or_404(
+        CartItem, id=item_id, cart__owner=request.user
+    )
     cart_item.delete()
 
     return redirect('cart')

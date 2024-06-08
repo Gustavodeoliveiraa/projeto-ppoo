@@ -29,11 +29,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var form_register_btn = document.getElementById('btn-register')
     var register_form = document.getElementById('register-form')
 
-    form_register_btn.addEventListener('click', function(event) {
-        register_form.submit()
-        console.log('aaaaaaaaaaaaaaaaaaaaaaa')
-        
+    if (form_register_btn != null){
+        form_register_btn.addEventListener('click', function(event) {
+            register_form.submit()
+            
+        })
+    }
+
+
+    var logado = document.getElementById("iflog");
+
+    logado.addEventListener('click', (event) => {
+        if (logado.classList.contains('True') || logado.classList.contains('true')) {
+            event.preventDefault();
+            console.log('O usuário está logado.');
+        } else {
+            console.log('O usuário não está logado.');
+        }
+    });
+    
+    // fechando model
+    document.getElementById('close').addEventListener('click', function() {
+        // Oculta o modal
+        document.querySelector('.modal').style.display = 'none';
+    });
+    
+
+    document.getElementById('iflog').addEventListener('click', function() {
+        document.querySelector('.modal').style.display = 'flex'
     })
-
-
 })

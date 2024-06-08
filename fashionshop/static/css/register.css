@@ -8,9 +8,22 @@ input {
     outline: none;
 }
 
+a {
+    text-decoration: none;
+    color: black;;
+}
+
+.container-logo {
+    height: 160px;
+    background-image: url('../imagens/logo_marca.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
 .container-register {
     min-width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;

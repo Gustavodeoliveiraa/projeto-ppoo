@@ -1,0 +1,28 @@
+{% load static %}
+
+{% block home %}
+    <div class="modal">
+        <div class="profile pt-2">
+            <div class="profile-inside d-flex flex-row align-items-center w-100 justify-content-between">
+                <h1 class="p-0 m-0 h1-center ps-4">Meu Perfil</h1>
+                <button type="button" class="btn-close me-2 mb-1" id="close" aria-label="Close"></button>
+            </div>
+
+            <div class="container-buttons pt-3 d-flex flex-column">
+                {% if user.is_authenticated %}
+                    <a><button aria-disabled="true" disabled class="mt-3 btn btn-primary">Registrar-se</button></a>
+                {% else %}
+                    <a href=" {% url "cadastra" %} "><button  class="mt-3 btn btn-primary">Registrar-se</button></a>
+                {% endif %}
+
+                <a href=" {% url "login" %} "><button class="mt-3 btn btn-primary">Logar</button></a>
+
+                {% if not user.is_authenticated %}
+                    <a><button aria-disabled="true" disabled class="mt-3 btn btn-primary">Sair</button></a>
+                {% else %}
+                    <a href=" {% url "logout" %} "><button class="mt-3 btn btn-primary">Sair</button></a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock home %}

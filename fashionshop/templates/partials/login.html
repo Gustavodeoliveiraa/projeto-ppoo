@@ -1,7 +1,7 @@
 {% extends "home.html" %}
 {% load static %}
 
-{% block title %} Register {% endblock title %}
+{% block title %} Login {% endblock title %}
 {% block css %}
     <link  defer rel="stylesheet" href="{% static "css/register.css" %}">
 {% endblock css %}
@@ -13,7 +13,8 @@
 
     <div class="container-register d-flex flex-column">
         <div class="container-image-register">
-            <form id="register-form" class="row g-3 d-flex w-75" method="post" action="{% url "cadastra" %}">
+            <form id="register-form" class="row g-3 d-flex w-75" method="post" action="{% url "login" %}">
+                {% csrf_token %}
                 {% for field in form %}
                     <div class="col-md-12 form-control mb-2">
                     {{field}}
@@ -28,7 +29,7 @@
         </div>
         
         <div class="d-grid gap-1 w-50 mt-5 buttons">
-            <button id="btn-register" class="btn btn-secondary mb-3 p-2" type="button">Registrar-se</button>
+            <button id="btn-register" class="btn btn-secondary mb-3 p-2" type="button">Logar</button>
         </div>
     </div>
 {% endblock home %}

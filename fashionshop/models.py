@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django import forms
+from django.contrib.auth import authenticate
 
 
 class Categories(models.Model):
@@ -103,3 +104,25 @@ class FormRegister(forms.ModelForm):
         if User.objects.filter(username=username).exists():
             self.add_error('username', 'Este nome já está em uso.')
         return username
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={'placeholder': 'Seu nome de usuário'})
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'placeholder': 'Sua senha'})
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+
+        if username and password:
+            # Verifique se as credenciais são válidas
+            user = authenticate(username=username, password=password)
+            if not user:
+                raise forms.ValidationError('Nome de usuário ou senha inválidos.')
+
+        return cleaned_data

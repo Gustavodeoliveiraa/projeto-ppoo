@@ -10,13 +10,7 @@ p {
     margin: 0;
 }
 
-rect {
-    height: 100%;
-}
-
-
-/* cabeçalho */
-.header p{
+.header p {
     font-family: var(--font-logo);
     box-sizing: border-box;
 }
@@ -27,10 +21,7 @@ a {
     box-sizing: border-box;
 }
 
-
-/* busca por modelos */
 input {
-    border: none;
     border: none;
     outline: none;
 }
@@ -42,12 +33,25 @@ label {
     width: fit-content;
 }
 
+
+.row-custom .col-xs-12,
+.row-custom .col-sm-6,
+.row-custom .col-md-4,
+.row-custom .col-lg-4,
+.row-custom .col-xl-4 {
+    margin-bottom: 10px; 
+}
+
+.container {
+    max-width: 900px; /* Ajuste conforme necessário */
+}
+
 .image-container-search {
     width: 95%;
     overflow: hidden;
 }
 
-.image-container-search img{
+.image-container-search img {
     object-fit: cover;
 }
 
@@ -73,22 +77,15 @@ label {
     color: #6F8EFB;
 }
 
-/* FIM busca por modelos */
-
-/* Categorias */
-
-.container-buttons  {
+.container-buttons {
     border-bottom: 1px solid rgba(0, 0, 0, 0.212);
     border-radius: 20px;
 }
 
-.container-buttons::-webkit-scrollbar, .categories-container::-webkit-scrollbar {
+/* Esconde as barras de rolagem */
+.container-buttons::-webkit-scrollbar,
+.categories-container::-webkit-scrollbar {
     display: none;
-}
-
-.container-buttons, .categories-container  {
-    overflow-x: auto;
-    white-space: nowrap;
 }
 
 .icons {
@@ -102,11 +99,10 @@ label {
 .icons:hover {
     background-color: #6e6f7071;
 }
-/* FIM Categorias */
 
 .cursor,
 .row-custom,
-.container{
+.container {
     transition: transform 0.3s ease;
     box-sizing: border-box;
     overflow: hidden;
@@ -114,40 +110,57 @@ label {
 
 .cursor:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.01);
 }
 
-/* FIM Products */
-
-
-@media (max-width:992px ) {
-    .container{
-        max-width: 900px;
-    } 
+.a:hover img,
+.a:hover .infos {
+    border-radius: 20px;
 }
 
-@media (min-width: 620px) {
-    .image-container-search {
-        width: 80% !important;
-    }
-    
-    .text-slogan {
-        top: 60px;
-    }
-    
-    .search-input {
-        height: 40px;
-        bottom: 40px;
-    }
-
+.container-products .position-relative {
+    border-radius: 20px;
+    overflow: hidden;
 }
 
-@media (min-width: 100px) {
-    
+.container-products .teste {
+    background-color: rgba(0, 0, 0, 0.527);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
+.container-products .position-relative:hover .teste {
+    opacity: 1;
+}
 
-/* mensagens */
+.categories-container  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.teste button {
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff; 
+    color: #fff;
+    border: none; /
+}
+
+.teste {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.message-container {
+    position: absolute;
+    top: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
 
 .message {
     height: 8%;
@@ -161,14 +174,31 @@ label {
     border-radius: 20px;
 }
 
-.message-success{
+
+.message-success,
+.message-info  {
     border: 1px solid var(--color-success-dark);
     background: var(--color-success-light);
     color: var(--color-success-dark);
 }
 
-.message-error {
-    border: 1px solid var(--color-error-dark);
-    background: var(--color-error-light);
-    color: var(--color-error-dark);
+@media (max-width: 576px) {
+    .container {
+        max-width: 400px;
+    };
+}
+
+@media (min-width: 900px) {
+    
+    .image-container-search {
+        width: 70%;
+        height: 30%;
+    }
+}
+
+@media (min-width: 1400px) {
+    
+    .image-container-search {
+        width: 50%;
+    }
 }

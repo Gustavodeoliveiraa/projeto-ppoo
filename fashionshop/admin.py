@@ -1,6 +1,6 @@
 from django.contrib import admin
 from fashionshop.models import (
-    Product, Categories, ShoppingCarts
+    Product, Categories, ShoppingCart
 )
 
 
@@ -19,6 +19,6 @@ class AdminCategories(admin.ModelAdmin):
     search_fields = ('nome',)
 
 
-@admin.register(ShoppingCarts)
+@admin.register(ShoppingCart)
 class AdminShoppingCarts(admin.ModelAdmin):
     fields = ('owner', 'product', 'amount')

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.forms import ModelForm
 from django import forms
+
 
 class Categories(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
@@ -22,17 +22,32 @@ class Product(models.Model):
         return self.name
 
 
-class ShoppingCarts(models.Model):
+class ShoppingCart(models.Model):
     owner = models.ForeignKey(
         to=User, on_delete=models.PROTECT, blank=False, null=False
+    )
+
+    def __str__(self) -> str:
+        return f'{self.owner.username}'
+
+    def total(self):
+        total_amount = sum(
+            item.product.price * item.quantity for item in self.items.all()
+        )
+        return total_amount
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(
+        to=ShoppingCart, related_name='items', on_delete=models.PROTECT
     )
     product = models.ForeignKey(
         to=Product, on_delete=models.PROTECT, blank=False, null=False
     )
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self) -> str:
-        return f'{self.owner.username}'
+        return f'{self.product.name} - {self.quantity}'
 
 
 class FormRegister(forms.ModelForm):

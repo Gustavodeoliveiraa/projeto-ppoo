@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect
-from .models import Product, FormRegister
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Product, FormRegister, ShoppingCart, CartItem
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -67,3 +69,36 @@ def cadastra(request):
     return render(
         request, template_name="partials/register.html", context={'form': form}
     )
+
+
+def shoppingcart(request):
+    cart, created = ShoppingCart.objects.get_or_create(owner=request.user)
+
+    return render(
+        request, template_name="partials/shoppingcart.html",
+        context={'cart': cart, 'total': cart.total() if not created else 0}
+    )
+
+
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart, created = ShoppingCart.objects.get_or_create(owner=request.user)
+
+    cart_item, created = CartItem.objects.get_or_create(
+        cart=cart, product=product
+    )
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    messages.info(request, 'Item adicionado ao carrinho')
+
+    return redirect('home')
+
+
+@login_required
+def remove_from_cart(request, item_id):
+    cart_item = get_object_or_404(CartItem, id=item_id, cart__owner=request.user)
+    cart_item.delete()
+
+    return redirect('cart')

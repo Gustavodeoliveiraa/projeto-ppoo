@@ -1,19 +1,25 @@
-{% load static %}
+<div class="container-products mt-5 pt-3 w-100">
 
-<div class="container-products mt-5 w-100">
   {% if message %}
     <div class="container d-flex justify-content-center mt-5">
-      {{message}}
+      <div class="message-container">
+        {{ message }} zzzzzzzzzzzzzzzzzzzzzzzzzzzz
+      </div>
     </div>
   {% else %}
     <div class="container text-center p-0">
-      <div class="row row-custom d-flex w-100">
+      <div class="row row-custom">
         {% for product in products %}
-          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column mb-3 cursor">
-            <img src="{{product.image.url}}" alt="">
-            <div class="infos d-flex w-100  flex-column" >
-              <p class="fw-bolder">R$: {{product.price}}</p>
-              <p > {{product.name}} </p>
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 d-flex justify-content-center flex-column mb-3 cursor a">
+            <div class="position-relative w-100 h-100 rounded-sm">
+              <div class="teste position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
+                <a href=" {% url "add" product.id %} "><button type="button" class="btn btn-primary">Adicionar ao Carrinho</button></a>
+              </div>
+              <img class="w-100" src="{{product.image.url}}" alt="">
+              <div class="infos d-flex w-100 flex-column">
+                <p class="fw-bolder">R$: {{product.price}}</p>
+                <p>{{product.name}}</p>
+              </div>
             </div>
           </div>
         {% endfor %}

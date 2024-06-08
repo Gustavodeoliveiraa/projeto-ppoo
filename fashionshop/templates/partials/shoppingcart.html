@@ -1,0 +1,49 @@
+{% extends "home.html" %}
+{% load static %}
+
+
+{% block title %}
+    Carrinho
+{% endblock title %}
+
+
+{% block css %}
+    <link defer rel="stylesheet" href="{% static "css/cart.css" %}">
+{% endblock css %}
+
+{% block home %}
+    {% include "partials/header.html" %}
+
+    <div class="title-price w-100 fw-bolder d-flex justify-content-between">
+        <p class="ms-4">preco</p>
+        <p class="me-4">Total: {{total}}</p>
+    </div>
+
+    {% if cart.items.all %}
+        {% for item  in cart.items.all %}
+        <div class="itens w-100 mt-5 d-flex justify-content-between ">
+            <div class="d-flex align-items-center img-produto w-25 h-100 ps-2 me-2">
+                <img src=" {{item.product.image.url}} " alt="">
+            </div>
+            <div class="infos d-flex justify-content-center flex-column align-items-start ms-5">
+                <p class="mb-5"> {{item.product.name}} </p>
+                <p>R$ {{item.product.price}}</p>
+
+                <div class="buttons w-75 d-flex justify-content-between me-5">
+                    <input type="number" name="" id="" value="{{ item.quantity}}" readonly>
+
+                    <a href="{% url "remove" item.id %}"><button>remover</button></a>
+                </div>
+            </div>
+        </div>
+       {% endfor %}
+    {% else %}
+        <div class="container w-100 d-flex justify-content-center mt-5 empty">
+            <p>Carrinho Vazio</p>
+        </div>
+    {% endif %}
+
+
+
+
+{% endblock home %}
